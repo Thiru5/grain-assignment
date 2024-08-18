@@ -15,5 +15,25 @@ module Types
     def getAllMenus
       Menu.all
     end
+
+    def getMenuById(id:)
+      Menu.find(id)
+    end
+
+    def getSections(menu_id:)
+      Menu.find(menu_id).sections
+    end
+
+    def getSection(menu_id:, section_id:)
+      Menu.find(menu_id).sections.find(section_id)
+    end
+
+    def getItems(menu_id:, section_id:)
+      Menu.find(menu_id).sections.find(section_id).items
+    end
+
+    def getItem(menu_id:, section_id:, item_id:)
+      Menu.find(menu_id).sections.find(section_id).items.find(item_id)
+    end
   end
 end

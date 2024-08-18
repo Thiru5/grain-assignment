@@ -8,107 +8,7 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-
-# menu_variety = [ 'Indian', 'Chinese', 'Italian' ]
-# section_variety = [ 'Appetizers', 'Main Course', 'Add-Ons' ]
-# indian_appetizer = [ 'Samosa', 'Pakora', 'Papdi Chaat', 'Dahi Puri', 'Aloo Tikki' ]
-# chinese_appetizer = [ 'Spring Rolls', 'Dimsums', 'Manchurian', 'Noodles', 'Fried Rice' ]
-# italian_appetizer = [ 'Bruschetta', 'Garlic Bread', 'Soup', 'Salad', 'Pesto' ]
-# indian_main = [ 'Biryani', 'Butter Chicken', 'Paneer Tikka', 'Masala Dosa', 'Chole Bhature' ]
-# chinese_main = [ 'Fried Rice', 'Manchurian', 'Noodles', 'Dimsums', 'Spring Rolls' ]
-# italian_main = [ 'Pasta', 'Pizza', 'Lasagna', 'Risotto', 'Tiramisu' ]
-# indian_addons = [ 'Raita', 'Papad', 'Salad', 'Pickles', 'Chutney' ]
-# chinese_addons = [ 'Chilli Sauce', 'Soy Sauce', 'Vinegar', 'Kimchi', 'Chowmein' ]
-# italian_addons = [ 'Garlic Bread', 'Soup', 'Salad', 'Bruschetta', 'Pesto' ]
-# indian_dishes_array = [ indian_appetizer, indian_main, indian_addons ]
-# chinese_dishes_array = [ chinese_appetizer, chinese_main, chinese_addons ]
-# italian_dishes_array = [ italian_appetizer, italian_main, italian_addons ]
-# dishes_array = [ indian_dishes_array, chinese_dishes_array, italian_dishes_array ]
-
-
 puts("Seeding database...")
-
-# menu_variety.each do |menu, menu_index|
-#   puts("Creating menu: #{menu}")
-#   created_menu = Menu.create(
-#     identifier: Faker::Alphanumeric.alpha(number: 10),
-#     label: menu,
-#     state: "active",
-#     start_date: Faker::Date.between(from: 2.days.ago, to: Date.today),
-#     end_date: Faker::Date.between(from: Date.today, to: 2.days.from_now)
-#   )
-
-#   section_variety.each do |section, section_index|
-#     puts("Creating section: #{section}")
-#     created_section = Section.create(
-#       identifier: Faker::Alphanumeric.alpha(number: 10),
-#       label: section,
-#       description: `Section for #{section}`
-#     )
-#     MenuSection.create(
-#       menu_id: created_menu.id,
-#       section_id: created_section.id,
-#       display_order: Faker::Number.number(digits: 2),
-#     )
-#      dishes_array[menu_index][section_index].each do |dish|
-#       puts("Creating item: #{dish}")
-#       created_section_item = SectionItem.create(
-#         section_id: created_section.id,
-#         display_order: Faker::Number.number(digits: 2)
-#       )
-#       section_index == 2 ? (
-#         item = Item.create(
-#         section_item_id: created_section_item.id,
-#         identifier: Faker::Alphanumeric.alpha(number: 10),
-#         item_type: "Product",
-#         label: dish,
-#         description: `Description for #{dish}`,
-#         price: Faker::Number.decimal(l_digits: 2)
-#       )
-
-#       Modifier.create(
-#         item_id: component.id,
-#         modifier_group_id: modifier_group.id,
-#         display_order: Faker::Number.number(digits: 2),
-#         default_quantity: Faker::Number.number(digits: 1),
-#         price_override: Faker::Number.decimal(l_digits: 2)
-#       )
-#       ) : (
-#         puts("Creating component: #{dish}")
-#         component = Item.create(
-#           section_item_id: created_section_item.id,
-#           identifier: Faker::Alphanumeric.alpha(number: 10),
-#           item_type: "Component",
-#           label: dish,
-#           description: `Description for #{dish}`,
-#           price: Faker::Number.decimal(l_digits: 2)
-#         )
-#         modifier_group_1 = ModifierGroup.create(
-#             identifier: Faker::Alphanumeric.alpha(number: 10),
-#             label: 'Modifier Group for ' + dish,
-#             selection_required_min: 1,
-#             selection_required_max: 3
-#         )
-#         modifier_group_2 = ModifierGroup.create(
-#             identifier: Faker::Alphanumeric.alpha(number: 10),
-#             label: 'Modifier Group for ' + dish,
-#             selection_required_min: 1,
-#             selection_required_max: 3
-#         )
-#         modifier_groups = [ modifier_group_1, modifier_group_2 ]
-
-#         modifier_groups.each do |modifier_group|
-#           puts("Creating modifier group: #{modifier_group.label}")
-#           ItemModifierGroup.create(
-#             item_id: component.id,
-#             modifier_group_id: modifier_group.id
-#           )
-#         end
-#       )
-#     end
-#   end
-# end
-#
 
 
 puts("Creating menu: Indian")
@@ -120,6 +20,7 @@ created_menu = Menu.create(
   end_date: Faker::Date.between(from: Date.today, to: 2.days.from_now)
 )
 
+# #section 1
 puts("Creating section: Appetizers")
 created_section = Section.create(
   identifier: Faker::Alphanumeric.alpha(number: 10),
@@ -130,14 +31,12 @@ created_section = Section.create(
 MenuSection.create(
   menu_id: created_menu.id,
   section_id: created_section.id,
-  display_order: Faker::Number.number(digits: 2),
+  display_order: 1,
 )
 
+
 puts("Creating item: Samosa")
-created_section_item = SectionItem.create(
-  section_id: created_section.id,
-  display_order: Faker::Number.number(digits: 2)
-)
+
 
 product = Item.create(
   identifier: Faker::Alphanumeric.alpha(number: 10),
@@ -146,6 +45,13 @@ product = Item.create(
   description: "Description for Samosa",
   price: Faker::Number.decimal(l_digits: 2)
 )
+
+SectionItem.create(
+  section_id: created_section.id,
+  item_id: product.id,
+  display_order: Faker::Number.number(digits: 2)
+)
+
 
 puts("Creating components for No. of Samosas")
 component = Item.create(
@@ -189,15 +95,51 @@ components.each do |component|
   )
 end
 
+# #section 1 end
+#
+# section 2
+
+puts("Creating section: Main Course")
+created_section_main = Section.create(
+  identifier: Faker::Alphanumeric.alpha(number: 10),
+  label: "Main Course",
+  description: "Section for Main Course"
+)
+
+MenuSection.create(
+  menu_id: created_menu.id,
+  section_id: created_section_main.id,
+  display_order: 2,
+)
+
+puts("Creating item: Biryani")
+product_main = Item.create(
+  identifier: Faker::Alphanumeric.alpha(number: 10),
+  item_type: "Product",
+  label: "Biryani",
+  description: "Description for Biryani",
+  price: Faker::Number.decimal(l_digits: 2)
+)
+
+SectionItem.create(
+  section_id: created_section_main.id,
+  item_id: product_main.id,
+  display_order: 1
+)
+
+puts("Creating Masala Thosai")
+product_main_two = Item.create(
+  identifier: Faker::Alphanumeric.alpha(number: 10),
+  item_type: "Product",
+  label: "Masala Thosai",
+  description: "Description for Masala Thosai",
+)
+
+SectionItem.create(
+  section_id: created_section_main.id,
+  item_id: product_main_two.id,
+  display_order: 2
+)
 
 
 puts("Database seeded!")
-
-
-# item = Item.create(
-#         identifier: Faker::Alphanumeric.alpha(number: 10),
-#         type: "Product",
-#         label: Faker::Food.dish,
-#         description: Faker::Food.description,
-#         price: Faker::Number.decimal(l_digits: 2)
-#     )

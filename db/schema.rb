@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_18_083509) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_18_092355) do
   create_table "item_modifier_groups", force: :cascade do |t|
     t.integer "item_id", null: false
     t.integer "modifier_group_id", null: false
@@ -21,7 +21,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_18_083509) do
   end
 
   create_table "items", force: :cascade do |t|
-    t.string "type"
+    t.string "item_type"
     t.string "identifier"
     t.string "label"
     t.string "description"

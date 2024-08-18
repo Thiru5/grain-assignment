@@ -8,8 +8,8 @@ class Mutations::CreateItem < Mutations::BaseMutation
   field :item, Types::ItemType, null: false
   field :errors, [ String ], null: false
 
-  def resolve(item_type:, identifier:, label:, description:, price:)
-    item = Item.new(item_type: item_type, identifier: Faker::Alphanumeric.alpha(number: 10), label: label, description: description, price: price)
+  def resolve(identifier:, item_type:, label:, description:, price:)
+    item = Item.new(item_type: item_type, identifier: identifier, label: label, description: description, price: price)
     if item.save
       {
         item: item,

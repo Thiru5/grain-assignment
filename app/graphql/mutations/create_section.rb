@@ -7,7 +7,7 @@ class Mutations::CreateSection < Mutations::BaseMutation
   field :errors, [ String ], null: false
 
   def resolve(label:, description:, identifier:)
-    section = Section.new(label: label, description: description, identifier: Faker::Alphanumeric.alpha(number: 10))
+    section = Section.new(label: label, description: description, identifier: identifier)
     if section.save
       {
         section: section,

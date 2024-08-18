@@ -8,7 +8,7 @@ class Mutations::CreateModifierGroup < Mutations::BaseMutation
   field :errors, [ String ], null: false
 
   def resolve(identifier:, label:, selection_required_min:, selection_required_max:)
-    modifier_group = ModifierGroup.new(identifier: Faker::Alphanumeric.alpha(number: 10), label: label, selection_required_min: selection_required_min, selection_required_max: selection_required_max)
+    modifier_group = ModifierGroup.new(identifier: identifier, label: label, selection_required_min: selection_required_min, selection_required_max: selection_required_max)
     if modifier_group.save
       {
         modifier_group: modifier_group,

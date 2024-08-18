@@ -9,6 +9,7 @@ gem "puma", ">= 5.0"
 gem "graphiql-rails"
 gem "graphql"
 gem "faker"
+gem "rack-cors"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 # Use Redis adapter to run Action Cable in production

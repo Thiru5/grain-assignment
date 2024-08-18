@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   root to: "graphql#execute"
-  if Rails.env.development?
-    mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql#execute"
-  end
+  mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql#execute"
   post "/graphql", to: "graphql#execute"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -88,8 +88,12 @@ GEM
       reline (>= 0.3.8)
     drb (2.2.1)
     erubi (1.13.0)
+    faker (3.4.2)
+      i18n (>= 1.8.11, < 2)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    graphiql-rails (1.10.1)
+      railties
     i18n (1.14.5)
       concurrent-ruby (~> 1.0)
     io-console (0.7.2)
@@ -263,6 +267,8 @@ DEPENDENCIES
   bootsnap
   brakeman
   debug
+  faker
+  graphiql-rails
   puma (>= 5.0)
   rails (~> 7.2.0)
   rubocop-rails-omakase

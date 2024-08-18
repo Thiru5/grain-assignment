@@ -1,0 +1,2 @@
+class ModifierGroup < ApplicationRecord
+end

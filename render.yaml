@@ -1,7 +1,7 @@
 databases:
   - name: grain_assignment
     databaseName: grain_assignment
-    user: Thiru
+    user: thiru
     plan: free
 
 services:

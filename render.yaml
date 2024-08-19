@@ -1,21 +1,21 @@
 databases:
-  - name: grain_assignment
-    databaseName: grain_assignment
-    user: grain_assignment
+  - name: mysite
+    databaseName: mysite
+    user: mysite
     plan: free
 
 services:
   - type: web
-    name: grain_assignment
+    name: mysite
     runtime: ruby
     plan: free
     buildCommand: "./bin/render-build.sh"
     # preDeployCommand: "bundle exec rails db:migrate" # preDeployCommand only available on paid instance types
-    startCommand: "bundle exec puma -C config/puma.rb"
+    startCommand: "bundle exec rails server"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: grain_assignment
+          name: mysite
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false

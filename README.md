@@ -1,17 +1,19 @@
-# Project
+# Grain Assignment
 
 [https://grain-assignment.onrender.com](https://grain-assignment.onrender.com)
 
-## Install
+<details>
 
-### Clone the repository
+<summary><strong> Installation and Deployment </strong></summary>
+
+## Clone the repository
 
 ```shell
 git clone https://github.com/Thiru5/grain-assignment.git
 cd grain-assignment
 ```
 
-### Check your Ruby version
+## Check your Ruby version
 
 ```shell
 ruby -v
@@ -25,7 +27,7 @@ If not, install the right ruby version using [rbenv](https://github.com/rbenv/rb
 rbenv install 3.3.4
 ```
 
-### Install dependencies
+## Install dependencies
 
 Using [Bundler](https://github.com/bundler/bundler) and Brew:
 
@@ -36,7 +38,7 @@ bundler update
 
 ```
 
-### Initialize the database using SQLITE3
+## Initialize the database using SQLITE3
 
 SQLite3 comes default. Will have to change to PostgreSQL for deployment later
 
@@ -50,7 +52,9 @@ rails db:create db:migrate db:seed
 rails s
 ```
 
-## Set Up Render Deployment
+---
+
+## Render Deployment Setup
 
 Create file called `/bin/render-build.sh` and add in the following:
 
@@ -111,28 +115,61 @@ Run this command after:
 
 ```shell
 rails db:system:change --to=postgresql
+rails db:create
+rails db:migrate
+rails db:seed
 ```
+
+Push all changes to repo.
 
 ## Deploy
 
-### With Render pipeline (recommended)
+Create a free Database Instance on render.com and a free Web-Service instance with Ruby as the language.
 
-Push to Github Repo
+# For the DB Instance:
 
-```shell
-git push main
+Name : grain-assignment
+PostgreSQL Version: 16
+Free Instance
+
+Click create/deploy.
+
+> [!NOTE]
+> Copy the Internal Database URL from the DB instance once it is live.
+
+# For the Web-Service Instance:
+
+Connect to Repository on Github
+
+Name : grain-assignment
+Free Instance
+branch: main
+
+Build Command: bundle install; bundle exec rake assets:precompile; bundle exec rake assets:clean; ./bin/render-build.sh; ./bin/rails db:drop; ./bin/rails db:create; ./bin/rails db:migrate; ./bin/rails db:seed;
+
+> [!IMPORTANT]
+> Remember to remove db:seed command after 1st deploy - will trigger a re-deploy which is fine.
+
+Start Command: bundle exec puma -t 5:5 -p ${PORT:-3000} -e ${RACK_ENV:-development}; ./bin/rails server
+
+Environment Variables:
+
+```
+DATABASE_URL : {PASTE THE COPIED INTERNAL DB URL}
+RAILS_MASTER_KEY: {PASTE FROM MASTER.KEY}
+WEB_CONCURRENCY: 2
 ```
 
-Go to the Heroku Dashboard and [promote the app to production](https://devcenter.heroku.com/articles/pipelines) or use Heroku CLI:
+Deploy/Create
 
-```shell
-heroku pipelines:promote -a project-staging
-```
+## Directly to production (not recommended)
 
-### Directly to production (not recommended)
+Pushing to Github will automatically re-deploy the main branch to render.
+This has been done with main branch for this assignment alone and should not be carried out in real-world applications.
+Convention is to create branches such as production, staging and demo. With all staging and demo running as private instances and production being live on render.
 
-Push to Heroku production remote:
+## Once Live
 
-```shell
-git push heroku
-```
+You will be able to see the GraphIQL Interface. HAPPY QUERYING!
+
+</details>

@@ -263,6 +263,7 @@ GraphIQL > Postman? I guess its easier since GraphIQL allows you to update the d
 
 GraphQL as whole was fun to learn and I think I would definitely think about integrating this in my next passion project. But I am curious as to whether it saves time and if it could change how my work flows in the backend when implemented with React.
 
+</details>
 <details>
 
 <summary><strong> Problems & Revelations </strong></summary>
